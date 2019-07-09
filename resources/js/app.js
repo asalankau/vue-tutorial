@@ -20,7 +20,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('product', require('./components/Product.vue').default);
-
+Vue.component('product-review', require('./components/ProductReview.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -32,5 +32,12 @@ const app = new Vue({
     data:{
         premium:false,
         cart:0,
+        reviews: [],
+    },
+    methods:{
+        addReview(productReview){
+            console.log(productReview);
+            this.reviews.push(productReview)
+        },
     }
 });

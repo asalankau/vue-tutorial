@@ -45,6 +45,7 @@
                 product: [],
                 cart:0,
                 selectedVariant:0,
+                reviews:[],
             }
         },
         methods: {
@@ -56,7 +57,8 @@
             },
             removeFromCart:function () {
                 this.cart -= 1
-            }
+            },
+
 
         },
         computed:{
@@ -99,7 +101,7 @@
                 }
 
                 return "2.99"
-            }
+            },
         },
         props: {
             text_var:{

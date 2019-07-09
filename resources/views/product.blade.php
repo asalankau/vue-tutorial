@@ -13,4 +13,5 @@
 <div id="app">
     <div class="nav-bar"></div>
     <product :premium="premium"></product>
+    <product-review @review-submitted="addReview"></product-review>
 </div>
