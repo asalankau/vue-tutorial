@@ -1860,7 +1860,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "productReview",
   mounted: function mounted() {
@@ -1870,8 +1869,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       name: null,
       review: null,
-      rating: null,
-      reviews: []
+      rating: null
     };
   },
   methods: {
@@ -1881,12 +1879,15 @@ __webpack_require__.r(__webpack_exports__);
         review: this.review,
         rating: this.rating
       };
+      console.log(this.reviews);
+      axios.post('api/review/add', productReview).then(function (response) {});
       this.$emit('review-submitted', productReview);
       this.name = null;
       this.review = null;
       this.rating = null;
     }
-  }
+  },
+  props: ['reviews']
 });
 
 /***/ }),
@@ -6348,7 +6349,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nbody {\n    font-family: tahoma;\n    color:#282828;\n    margin: 0px;\n}\n.nav-bar {\n    background: -webkit-gradient(linear, right top, left top, from(#84CF6A), to(#16C0B0));\n    background: linear-gradient(-90deg, #84CF6A, #16C0B0);\n    height: 60px;\n    margin-bottom: 15px;\n}\n.product {\n    display: -webkit-box;\n    display: flex;\n    flex-flow: wrap;\n    padding: 1rem;\n}\nimg {\n    border: 1px solid #d8d8d8;\n    width: 70%;\n    margin: 40px;\n    box-shadow: 0px .5px 1px #d8d8d8;\n}\n.product-image {\n    width: 80%;\n}\n.product-image,\n.product-info {\n    margin-top: 10px;\n    width: 50%;\n}\n.color-box {\n    width: 40px;\n    height: 40px;\n    margin-top: 5px;\n}\n.cart {\n    margin-right: 25px;\n    float: right;\n    border: 1px solid #d8d8d8;\n    padding: 5px 20px;\n}\nbutton {\n    margin-top: 30px;\n    border: none;\n    background-color: #1E95EA;\n    color: white;\n    height: 40px;\n    width: 100px;\n    font-size: 14px;\n}\n.disabledButton {\n    background-color: #d8d8d8;\n}\n.review-form {\n    width: 400px;\n    padding: 20px;\n    margin: 40px;\n    border: 1px solid #d8d8d8;\n}\ninput {\n    width: 100%;\n    height: 25px;\n    margin-bottom: 20px;\n}\ntextarea {\n    width: 100%;\n    height: 60px;\n}\n.tab {\n    margin-left: 20px;\n    cursor: pointer;\n}\n.activeTab {\n    color: #16C0B0;\n    text-decoration: underline;\n}\n\n", ""]);
+exports.push([module.i, "\n.review-container{\n    height: 400px;\n    display: block;\n    flex-flow: wrap;\n    position: relative;\n    overflow: scroll;\n}\nbody {\n    font-family: tahoma;\n    color:#282828;\n    margin: 0px;\n}\n.nav-bar {\n    background: -webkit-gradient(linear, right top, left top, from(#84CF6A), to(#16C0B0));\n    background: linear-gradient(-90deg, #84CF6A, #16C0B0);\n    height: 60px;\n    margin-bottom: 15px;\n}\n.footer-bar {\n    background: -webkit-gradient(linear, right top, left top, from(#84CF6A), to(#16C0B0));\n    background: linear-gradient(-90deg, #84CF6A, #16C0B0);\n    height: 60px;\n    margin-bottom: -15px;\n    display: block;\n}\n.product {\n    display: -webkit-box;\n    display: flex;\n    flex-flow: wrap;\n    padding: 1rem;\n}\nimg {\n    border: 1px solid #d8d8d8;\n    width: 70%;\n    margin: 40px;\n    box-shadow: 0px .5px 1px #d8d8d8;\n}\n.product-image {\n    width: 80%;\n}\n.product-image,\n.product-info {\n    margin-top: 10px;\n    width: 50%;\n}\n.color-box {\n    width: 40px;\n    height: 40px;\n    margin-top: 5px;\n}\n.cart {\n    margin-right: 25px;\n    float: right;\n    border: 1px solid #d8d8d8;\n    padding: 5px 20px;\n}\nbutton {\n    margin-top: 30px;\n    border: none;\n    background-color: #1E95EA;\n    color: white;\n    height: 40px;\n    width: 100px;\n    font-size: 14px;\n}\n.disabledButton {\n    background-color: #d8d8d8;\n}\n.review-form{\n    width: 400px;\n    padding: 20px;\n    margin: 40px;\n    border: 1px solid #d8d8d8;\n    float:left;\n}\n.reviews{\n    width: 400px;\n    padding: 20px;\n    margin: 40px;\n    border: 1px solid #d8d8d8;\n    float:left;\n}\ninput {\n    width: 100%;\n    height: 25px;\n    margin-bottom: 20px;\n}\ntextarea {\n    width: 100%;\n    height: 60px;\n}\n.tab {\n    margin-left: 20px;\n    cursor: pointer;\n}\n.activeTab {\n    color: #16C0B0;\n    text-decoration: underline;\n}\n\n", ""]);
 
 // exports
 
@@ -37915,17 +37916,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", [
+  return _c("div", { staticClass: "review-container" }, [
+    _c("div", { staticClass: "reviews" }, [
       _c("h2", [_vm._v("Reviews")]),
       _vm._v(" "),
-      !_vm.reviews.length
+      !this.reviews.length
         ? _c("p", [_vm._v("There are no reviews yet.")])
         : _vm._e(),
       _vm._v(" "),
       _c(
         "ul",
-        _vm._l(_vm.reviews, function(review) {
+        _vm._l(this.reviews, function(review) {
           return _c("li", [
             _c("p", [_vm._v(_vm._s(review.name))]),
             _vm._v(" "),
@@ -50238,14 +50239,16 @@ Vue.component('product-review', __webpack_require__(/*! ./components/ProductRevi
 
 var app = new Vue({
   el: '#app',
-  data: {
-    premium: false,
-    cart: 0,
-    reviews: []
+  data: function data() {
+    return {
+      premium: false,
+      cart: 0,
+      reviews: []
+    };
   },
   methods: {
     addReview: function addReview(productReview) {
-      console.log(productReview);
+      //console.log(productReview);
       this.reviews.push(productReview);
     }
   }

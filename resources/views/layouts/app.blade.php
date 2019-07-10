@@ -5,13 +5,13 @@
     <title>App Name - @yield('title')</title>
 </head>
 <body>
-@section('sidebar')
-    This is the master sidebar.
-@show
 
-<div class="container">
+<div class="container fill">
     @yield('content')
 </div>
+@section('footer')
+    This is the footer.
+@show
 <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

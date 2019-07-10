@@ -29,14 +29,16 @@ Vue.component('product-review', require('./components/ProductReview.vue').defaul
 
 const app = new Vue({
     el: '#app',
-    data:{
-        premium:false,
-        cart:0,
-        reviews: [],
+    data: function (){
+        return{
+            premium:false,
+            cart:0,
+            reviews: [],
+        }
     },
     methods:{
         addReview(productReview){
-            console.log(productReview);
+            //console.log(productReview);
             this.reviews.push(productReview)
         },
     }

@@ -1,18 +1,18 @@
 <template>
 
-    <div>
-        <div>
+    <div class="review-container">
+
+        <div class="reviews">
             <h2>Reviews</h2>
-            <p v-if="!reviews.length">There are no reviews yet.</p>
+            <p v-if="!this.reviews.length">There are no reviews yet.</p>
             <ul>
-                <li v-for="review in reviews">
+                <li v-for="review in this.reviews">
                     <p>{{ review.name }}</p>
                     <p>Rating: {{ review.rating }}</p>
                     <p>{{ review.review }}</p>
                 </li>
             </ul>
         </div>
-
 
         <form class="review-form" @submit.prevent="onSubmit">
             <p>
@@ -41,7 +41,6 @@
             </p>
 
         </form>
-
     </div>
 </template>
 
@@ -56,7 +55,6 @@
                 name:null,
                 review:null,
                 rating:null,
-                reviews:[],
             }
         },
         methods:{
@@ -66,6 +64,12 @@
                     review: this.review,
                     rating: this.rating
                 }
+                console.log(this.reviews);
+
+                axios.post('api/review/add',productReview)
+                    .then( response => {
+                        
+                    });
 
                 this.$emit('review-submitted', productReview)
                 this.name = null
@@ -73,5 +77,6 @@
                 this.rating = null
             },
         },
+        props: ['reviews'],
     }
 </script>

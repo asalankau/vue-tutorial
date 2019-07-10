@@ -4,12 +4,13 @@
 
 @section('title', 'Page Title')
 
-@section('sidebar')
-    @parent
-
-    <p>This is appended to the master sidebar.</p>
-@endsection
 
 <div id="app">
     <my-button text_var="My submit button" type="submit"></my-button>
 </div>
+
+@section('footer')
+    @parent
+
+    <div>This is appended to the master sidebar.</div>
+@endsection

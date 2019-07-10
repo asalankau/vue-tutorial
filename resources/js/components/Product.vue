@@ -118,6 +118,13 @@
 </script>
 
 <style>
+    .review-container{
+        height: 400px;
+        display: block;
+        flex-flow: wrap;
+        position: relative;
+        overflow: scroll;
+    }
 
     body {
         font-family: tahoma;
@@ -129,6 +136,13 @@
         background: linear-gradient(-90deg, #84CF6A, #16C0B0);
         height: 60px;
         margin-bottom: 15px;
+    }
+
+    .footer-bar {
+        background: linear-gradient(-90deg, #84CF6A, #16C0B0);
+        height: 60px;
+        margin-bottom: -15px;
+        display: block;
     }
 
     .product {
@@ -181,11 +195,20 @@
         background-color: #d8d8d8;
     }
 
-    .review-form {
+    .review-form{
         width: 400px;
         padding: 20px;
         margin: 40px;
         border: 1px solid #d8d8d8;
+        float:left;
+    }
+
+    .reviews{
+        width: 400px;
+        padding: 20px;
+        margin: 40px;
+        border: 1px solid #d8d8d8;
+        float:left;
     }
 
     input {
