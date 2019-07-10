@@ -1860,6 +1860,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "productReview",
   mounted: function mounted() {
@@ -1869,22 +1876,31 @@ __webpack_require__.r(__webpack_exports__);
     return {
       name: null,
       review: null,
-      rating: null
+      rating: null,
+      errors: []
     };
   },
   methods: {
     onSubmit: function onSubmit() {
-      var productReview = {
-        name: this.name,
-        review: this.review,
-        rating: this.rating
-      };
-      console.log(this.reviews);
-      axios.post('api/review/add', productReview).then(function (response) {});
-      this.$emit('review-submitted', productReview);
-      this.name = null;
-      this.review = null;
-      this.rating = null;
+      if (this.name && this.review && this.rating) {
+        this.errors = [];
+        var productReview = {
+          name: this.name,
+          review: this.review,
+          rating: this.rating
+        };
+        console.log(this.reviews);
+        axios.post('api/review/add', productReview).then(function (response) {});
+        this.$emit('review-submitted', productReview);
+        this.name = null;
+        this.review = null;
+        this.rating = null;
+      } else {
+        this.errors = [];
+        if (!this.name) this.errors.push("Name required.");
+        if (!this.review) this.errors.push("Review required.");
+        if (!this.rating) this.errors.push("Rating required.");
+      }
     }
   },
   props: ['reviews']
@@ -37951,6 +37967,20 @@ var render = function() {
         }
       },
       [
+        _vm.errors.length
+          ? _c("p", [
+              _c("b", [_vm._v("Please correct the following error(s):")]),
+              _vm._v(" "),
+              _c(
+                "ul",
+                _vm._l(_vm.errors, function(error) {
+                  return _c("li", [_vm._v(_vm._s(error))])
+                }),
+                0
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c("p", [
           _c("label", { attrs: { for: "name" } }, [_vm._v("Name:")]),
           _vm._v(" "),

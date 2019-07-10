@@ -1,7 +1,6 @@
 <template>
 
     <div class="review-container">
-
         <div class="reviews">
             <h2>Reviews</h2>
             <p v-if="!this.reviews.length">There are no reviews yet.</p>
@@ -15,6 +14,14 @@
         </div>
 
         <form class="review-form" @submit.prevent="onSubmit">
+
+            <p v-if="errors.length">
+                <b>Please correct the following error(s):</b>
+            <ul>
+                <li v-for="error in errors">{{ error }}</li>
+            </ul>
+            </p>
+
             <p>
                 <label for="name">Name:</label>
                 <input id="name" v-model="name" placeholder="name">
@@ -55,26 +62,41 @@
                 name:null,
                 review:null,
                 rating:null,
+                errors: [],
             }
         },
         methods:{
             onSubmit() {
-                let productReview = {
-                    name: this.name,
-                    review: this.review,
-                    rating: this.rating
+
+                if(this.name && this.review && this.rating) {
+
+                    this.errors = []
+
+                    let productReview = {
+                        name: this.name,
+                        review: this.review,
+                        rating: this.rating
+                    }
+                    console.log(this.reviews);
+
+                    axios.post('api/review/add',productReview)
+                        .then( response => {
+
+                        });
+
+                    this.$emit('review-submitted', productReview)
+                    this.name = null
+                    this.review = null
+                    this.rating = null
+
+                } else {
+
+                    this.errors = []
+
+                    if(!this.name) this.errors.push("Name required.")
+                    if(!this.review) this.errors.push("Review required.")
+                    if(!this.rating) this.errors.push("Rating required.")
                 }
-                console.log(this.reviews);
-
-                axios.post('api/review/add',productReview)
-                    .then( response => {
-                        
-                    });
-
-                this.$emit('review-submitted', productReview)
-                this.name = null
-                this.review = null
-                this.rating = null
             },
         },
         props: ['reviews'],
